@@ -1,0 +1,98 @@
+<!-- Copyright (c) 2020 Andy Davies -->
+<html>
+    <head>
+        <title>Naked Table Example</title>
+        <link rel="stylesheet" type="text/css" href="example.css">
+        <script src="naked-table.js"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    </head>
+
+    <body>
+
+        <input type="text" id="searchinput"><button onclick="performSearch()">Search</button>
+        <hr>
+        <div id="tableTest"></div>
+
+    </body>
+
+    <script>
+
+        // an array that lets us generate randon names
+        let names = [{"first":"Fanchette","last":"Treffrey"},{"first":"Kiele","last":"Clow"}, {"first":"Trudey","last":"Aviss"},{"first":"Marrilee","last":"Aidler"},{"first":"Cristin","last":"Potkins"},{"first":"Cori","last":"Pinn"},{"first":"Ettore","last":"Tidey"},{"first":"Lorine","last":"Blazdell"},
+        {"first":"Alberto","last":"Rippingale"},{"first":"Moyra","last":"Heiton"},{"first":"Prudence","last":"Ballentime"},{"first":"Dot","last":"Frostick"},{"first":"Valentijn","last":"Ladon"},{"first":"Kiele","last":"Paolozzi"},{"first":"Johnnie","last":"Allnatt"},{"first":"Zachariah","last":"Spaule"},
+        {"first":"Retha","last":"Glede"},{"first":"Morton","last":"Twiname"},{"first":"Roscoe","last":"Aartsen"},{"first":"Petronille","last":"Meneur"},{"first":"Beitris","last":"Leuchars"},{"first":"Lindsay","last":"Back"},{"first":"Kerby","last":"Pollastro"},{"first":"Johannah","last":"Yurivtsev"},
+        {"first":"Cyrill","last":"Clemonts"},{"first":"Lorianna","last":"Scheu"},{"first":"Rocky","last":"Culshew"},{"first":"Jarid","last":"Smallpeice"},{"first":"Towny","last":"Fulker"},{"first":"Patricio","last":"Monument"},{"first":"Fredelia","last":"Gleave"},{"first":"Harmon","last":"Mabbitt"},
+        {"first":"Wilbert","last":"Aylesbury"},{"first":"Ira","last":"Ladd"},{"first":"Alano","last":"Blum"},{"first":"Jay","last":"Sperring"},{"first":"Bevon","last":"Winston"},{"first":"Glynis","last":"Delgua"},{"first":"Kelli","last":"Egglestone"},{"first":"Lorri","last":"Chatin"},
+        {"first":"Mignonne","last":"Gringley"},{"first":"Marve","last":"Rhelton"},{"first":"Marilin","last":"Gilhouley"},{"first":"Bondie","last":"Sawford"},{"first":"Cassandry","last":"MacDunlevy"},{"first":"Philis","last":"Boissier"},{"first":"Matilda","last":"Jeffers"},{"first":"Almeta","last":"Cecere"},
+        {"first":"Vanya","last":"Brownlee"},{"first":"Florri","last":"Rogers"},{"first":"Quintilla","last":"Buckney"},{"first":"Rickie","last":"Lippiatt"},{"first":"Ingamar","last":"Frost"},{"first":"Adrien","last":"Stoodale"},{"first":"Emmie","last":"Tunnick"},{"first":"Alic","last":"Burth"},
+        {"first":"Lotty","last":"Vasilik"},{"first":"Andonis","last":"Rakes"},{"first":"Leena","last":"Scambler"},{"first":"Connor","last":"Druitt"},{"first":"Zondra","last":"Tarborn"},{"first":"Jenilee","last":"Hynard"},{"first":"Correy","last":"Bransgrove"},{"first":"Pippo","last":"Piotrowski"},
+        {"first":"Donaugh","last":"Stockley"},{"first":"Guy","last":"Furtado"},{"first":"Alyda","last":"Millership"},{"first":"Nanci","last":"Seear"},{"first":"Cal","last":"Plank"},{"first":"Red","last":"Devall"},{"first":"Brana","last":"MacDowal"},{"first":"Tedie","last":"Rasmus"},
+        {"first":"Shelba","last":"Ashforth"},{"first":"Emile","last":"Plimmer"},{"first":"Clerkclaude","last":"Julian"},{"first":"Thurston","last":"Crathern"},{"first":"Tawnya","last":"Sargent"},{"first":"Abby","last":"Pester"},{"first":"Alfred","last":"Gumby"},{"first":"Cherey","last":"Juanes"},
+        {"first":"Desmond","last":"Blazevic"},{"first":"Carlene","last":"Bartles"},{"first":"Casper","last":"McClunaghan"},{"first":"Tabbatha","last":"Grellier"},{"first":"Natala","last":"Fosdyke"},{"first":"Cicily","last":"Clubley"},{"first":"Jedd","last":"Gadson"},{"first":"Gustie","last":"Crookes"},
+        {"first":"Eddie","last":"Avieson"},{"first":"Erna","last":"Brookesbie"},{"first":"Mil","last":"Saltsberg"},{"first":"Rourke","last":"Kinder"},{"first":"Clemens","last":"Church"},{"first":"Rodger","last":"McMennum"},{"first":"Clayborn","last":"Weems"},{"first":"Laetitia","last":"Craister"},
+        {"first":"Fletcher","last":"Maylam"},{"first":"Yorgos","last":"Leggis"},{"first":"Byrom","last":"Bartalin"},{"first":"Colet","last":"Mettetal"},{"first":"Daphene","last":"Gatlin"},{"first":"Babita","last":"Hartrick"},{"first":"Annora","last":"Lakenden"},{"first":"Ewell","last":"Elliott"},
+        {"first":"Chas","last":"Trees"},{"first":"Jacki","last":"Robjant"},{"first":"Geoffrey","last":"Applegate"},{"first":"Micheline","last":"Simoes"},{"first":"Dorey","last":"Tayspell"},{"first":"Sheeree","last":"Litterick"},{"first":"Ailene","last":"Millier"},{"first":"Prince","last":"Amort"},
+        {"first":"Cal","last":"Chesterman"},{"first":"Ezri","last":"Ducrow"},{"first":"Heather","last":"Herrero"},{"first":"Damon","last":"Ferres"},{"first":"Mose","last":"Cole"},{"first":"Gratia","last":"Hendren"},{"first":"Yale","last":"Colloby"},{"first":"Joella","last":"Noblet"},
+        {"first":"Dael","last":"Bachnic"},{"first":"Haley","last":"Firebrace"},{"first":"Kitti","last":"Balma"},{"first":"Brien","last":"Jeavon"},{"first":"Pierce","last":"Lowmass"},{"first":"Bryon","last":"Joanaud"},{"first":"Obidiah","last":"Rand"},{"first":"Consalve","last":"Iacoboni"},
+        {"first":"Barbara","last":"Colvie"},{"first":"Galvin","last":"Gatfield"},{"first":"Wallace","last":"Dewerson"},{"first":"Chastity","last":"McPeice"},{"first":"Esma","last":"Woolner"},{"first":"Berta","last":"Gronowe"},{"first":"Halley","last":"Anear"},{"first":"Read","last":"Rubes"},
+        {"first":"Mella","last":"Snelgar"},{"first":"Kesley","last":"Soames"},{"first":"Elden","last":"Vouls"},{"first":"Shandy","last":"Mc Queen"},{"first":"Clarissa","last":"Loche"},{"first":"Danell","last":"Challener"},{"first":"Kessia","last":"Hucquart"},{"first":"Jessee","last":"Marshland"},
+        {"first":"Royall","last":"Newcomb"},{"first":"Nicko","last":"McGlew"},{"first":"Gorden","last":"Bourhill"},{"first":"Jacquenetta","last":"Timson"},{"first":"Florri","last":"Gounet"},{"first":"Ekaterina","last":"Pardie"},{"first":"Torrance","last":"Beavon"},{"first":"Grant","last":"Fernyhough"},
+        {"first":"Dilan","last":"Dulany"},{"first":"Lucio","last":"Edinborough"},{"first":"Kelby","last":"Mouth"},{"first":"Floyd","last":"Denziloe"},{"first":"Axel","last":"Gaskall"},{"first":"Denna","last":"Carne"},{"first":"May","last":"O'Connel"},{"first":"Jaymie","last":"Monson"},
+        {"first":"Laney","last":"MacGaughy"},{"first":"Rania","last":"Burnsyde"},{"first":"Merl","last":"Budden"},{"first":"Carlen","last":"Eringey"},{"first":"Torr","last":"Plet"},{"first":"Sosanna","last":"Wilshin"},{"first":"Charley","last":"Peaddie"},{"first":"Meryl","last":"Peealess"},
+        {"first":"Ario","last":"McKomb"},{"first":"Bennie","last":"Allain"},{"first":"Ketti","last":"Van Dijk"},{"first":"Di","last":"Van Arsdall"},{"first":"Paul","last":"Scuse"},{"first":"Leland","last":"Lody"},{"first":"Bruis","last":"Bandt"},{"first":"Franni","last":"Swin"},
+        {"first":"Carolus","last":"Creane"},{"first":"Cordell","last":"Garside"},{"first":"Suellen","last":"Dominka"},{"first":"Flo","last":"Turnpenny"},{"first":"Val","last":"Atcherley"},{"first":"Korney","last":"Dancer"},{"first":"Rossie","last":"Monketon"},{"first":"Davy","last":"Merriott"},
+        {"first":"Gherardo","last":"Barradell"},{"first":"Ariel","last":"Saphir"},{"first":"Noelle","last":"Dadswell"},{"first":"Gwenore","last":"Holmyard"},{"first":"Hadrian","last":"Letford"},{"first":"Angela","last":"Monget"},{"first":"Jacquenette","last":"Cripps"},{"first":"Lewie","last":"Wiltshear"},
+        {"first":"Edyth","last":"Rennix"},{"first":"Case","last":"Probey"},{"first":"Norbie","last":"Pettifer"},{"first":"Wye","last":"Earingey"},{"first":"Roanna","last":"Matusevich"},{"first":"Fred","last":"Gaskin"},{"first":"Harriot","last":"Abdy"},{"first":"Griselda","last":"Fosbraey"},
+        {"first":"Dewitt","last":"Bointon"},{"first":"Kasey","last":"Quarrell"},{"first":"Atlanta","last":"Sowter"},{"first":"Edmund","last":"Groven"},{"first":"Hailey","last":"Tewes"},{"first":"Elfreda","last":"Dominec"},{"first":"Noelle","last":"Gooders"},{"first":"Binnie","last":"Trevillion"},
+        {"first":"Tatia","last":"Malafe"},{"first":"Jackson","last":"Wheal"},{"first":"Genevra","last":"Potell"},{"first":"Corbie","last":"Halsworth"},{"first":"Abie","last":"Tatum"},{"first":"Hallsy","last":"Shelmerdine"},{"first":"Anne-marie","last":"Filippello"},{"first":"Arlen","last":"Beckett"},
+        {"first":"Antonio","last":"Caesmans"},{"first":"Alexandro","last":"Chiene"},{"first":"Clemmy","last":"Karsh"},{"first":"Warde","last":"Redmayne"},{"first":"Dalton","last":"Shallo"},{"first":"Billi","last":"Mc Dermid"},{"first":"Renata","last":"Lenney"},{"first":"Phaidra","last":"Rowth"},
+        {"first":"Arielle","last":"Hakking"},{"first":"Rosetta","last":"Surfleet"},{"first":"Ambrosius","last":"Goldsworthy"},{"first":"Bren","last":"Penritt"},{"first":"Beauregard","last":"Schooling"},{"first":"Arney","last":"Campelli"},{"first":"Morganne","last":"Rehorek"},{"first":"Dare","last":"de la Valette Parisot"},
+        {"first":"Andree","last":"Patel"},{"first":"Milissent","last":"Fishleigh"},{"first":"Brewer","last":"Dunlea"},{"first":"Shelli","last":"Rivlin"},{"first":"Kristen","last":"Baswall"},{"first":"Georgeanna","last":"Steinson"},{"first":"Belvia","last":"Penniell"},{"first":"Inness","last":"Bernot"},
+        {"first":"Bea","last":"Planks"},{"first":"Wilmette","last":"Lamberteschi"},{"first":"Prisca","last":"Trenbey"},{"first":"Cora","last":"Cutmore"},{"first":"Carlotta","last":"Hammel"},{"first":"Derward","last":"Claypoole"},{"first":"Ingeborg","last":"Kliemke"},{"first":"La verne","last":"Lakenden"},
+        {"first":"Arabele","last":"Realff"},{"first":"Crissy","last":"Vido"}];
+        
+        let numItems = 1000;
+        let ptable = null;
+        
+        var idata = [];
+        
+        function rand(min, max) {
+                return Math.floor(Math.random() * (max - min)) + min;
+        };
+
+        function randDate() {
+                return new Date(rand(1230768000000, 1483228800000));
+        };
+
+        let obj = null;
+
+        for(let i = 0; i < numItems; i++) {
+            obj = {
+                        id: i,
+                        firstName: names[this.rand(0, names.length)].first,
+                        lastName: names[this.rand(0, names.length)].last,
+                        dob: moment((this.randDate())).format("Do MMM YYYY"),
+                    };
+                    idata.push(obj);
+        }
+
+        let tableOptions = {
+            fields: ['id', 'firstName', 'lastName', 'dob'], 
+            numbers: ['id', 'dob'], 
+            showByDefault : true,
+            indicatorAsc : '<img src="img/arrow_up.png"/>',
+            indicatorDesc : '<img src="img/arrow_down.png"/>'
+        }
+
+        window.addEventListener("load", function() {
+            nTable = new NakedTable(idata, "tableTest", tableOptions);
+            nTable.order("id", true);
+        });
+
+        function performSearch() {
+            nTable.search(document.getElementById('searchinput').value);
+        }
+    
+        </script>        
+
+</html>

@@ -1,0 +1,48 @@
+/* Copyright (c) 2020 Andy Davies */
+body {
+    background-color: whitesmoke;
+    padding: 20px;
+}
+
+#tableTest {
+    width: 100%;
+    table-layout: fixed;
+}
+
+#tableTest td {
+    padding:10px;
+    width: 25%;
+}
+
+#tableTest th {
+    padding:10px;
+    width: 25%;
+    text-align: left;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+
+#tableTest > table {
+    width: 100%;
+    border-collapse: collapse;
+    position: relative;
+}
+
+#tableTest > table >thead {
+    background-color: #1c87c9;
+    color: #ffffff;
+}
+
+#tableTest > table > thead > tr > td {
+    cursor: pointer;
+    text-transform:capitalize;
+}
+
+#tableTest > table > tbody tr:nth-child(odd) {
+background: #ffffff;
+}
+
+#tableTest > table > tbody tr:nth-child(even) {
+    background: #f4f4f4;
+}
+

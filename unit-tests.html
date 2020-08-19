@@ -1,0 +1,337 @@
+<!-- Copyright (c) 2020 Andy Davies -->
+<html>
+    <head>
+        <script src="naked-table.js"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.11.0.css">
+    </head>
+    <body>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        <script src="https://code.jquery.com/qunit/qunit-2.11.0.js"></script>
+        <script src="https://unpkg.com/qunit-dom/dist/qunit-dom.js"></script>
+        <div id="tableTest"></div>
+    </body>
+</html>
+
+<script>
+        
+    QUnit.module('Basic', function() {
+      QUnit.test('should be able to create table', function(assert) {
+        
+        let data = [{id: 1}, {id: 2}, {id: 3}];
+
+        let tableOptions = {
+            fields: ['id'], 
+            numbers: ['id'], 
+            showByDefault : true
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        assert.false(table == undefined, 'table is undefined');
+      });
+
+      QUnit.test('should display basic table', function(assert) {
+        
+        let data = [{id: 1}, {id: 2}, {id: 3}];
+
+        let tableOptions = {
+            fields: ['id'], 
+            numbers: ['id'], 
+            showByDefault : true
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id", true);
+        assert.dom('#tableTest table').exists();
+        assert.dom('#tableTest > table > tbody > tr').exists({count:3});
+      });
+
+
+      QUnit.test('should be able to create table and order', function(assert) {
+        
+        let data = [{id: 1}, {id: 2}, {id: 3}];
+
+        let tableOptions = {
+            fields: ['id'], 
+            numbers: ['id'], 
+            showByDefault : true
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id", true);
+        assert.dom('#tableTest > table > tbody > tr > td').hasText("1");
+      });
+
+      QUnit.test('should be able to create table and order desc', function(assert) {
+        
+        let data = [{id: 1}, {id: 2}, {id: 3}];
+
+        let tableOptions = {
+            fields: ['id'], 
+            numbers: ['id'], 
+            showByDefault : true
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id", false);
+        assert.dom('#tableTest > table > tbody > tr > td').hasText("3");
+      });
+
+      QUnit.test('should default to asc order', function(assert) {
+        
+        let data = [{id: 1}, {id: 2}, {id: 3}];
+
+        let tableOptions = {
+            fields: ['id'], 
+            numbers: ['id'], 
+            showByDefault : true
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id");
+        assert.dom('#tableTest > table > tbody > tr > td').hasText("1");
+      });
+
+      QUnit.test('should only show single requested columns', function(assert) {
+        
+        let data = [{id: 1, di: 3}, {id: 2, di: 2}, {id: 3, di:1}];
+
+        let tableOptions = {
+            fields: ['id'], 
+            numbers: ['id'], 
+            showByDefault : true
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id");
+        
+        assert.dom('#tableTest > table > thead > tr > th').includesText("id");
+        assert.dom('#tableTest > table > thead > tr > th').exists({count:1});
+      });
+
+      QUnit.test('should only show two requested columns', function(assert) {
+        
+        let data = [{id: 1, di: 3}, {id: 2, di: 2}, {id: 3, di:1}];
+
+        let tableOptions = {
+            fields: ['id', 'di'], 
+            numbers: ['id'], 
+            showByDefault : true
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id");
+        
+        assert.dom('#tableTest > table > thead > tr > th').includesText("id");
+        assert.dom('#tableTest > table > thead > tr > th').exists({count:2});
+      });
+
+      QUnit.test('should hide if shown by default is false', function(assert) {
+        
+        let data = [{id: 1, di: 3}, {id: 2, di: 2}, {id: 3, di:1}];
+
+        let tableOptions = {
+            fields: ['id', 'di'], 
+            numbers: ['id'], 
+            showByDefault : false
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id");
+        
+        assert.dom('#tableTest > table > tbody > tr').doesNotExist();
+      });
+
+      QUnit.test('should trim objects by default', function(assert) {
+        
+        let data = [{id: 1, di: 3}, {id: 2, di: 2}, {id: 3, di:1}];
+
+        let tableOptions = {
+            fields: ['id'], 
+            numbers: ['id'], 
+            showByDefault : true
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id");
+        
+        console.table(table.data);
+        assert.true(table.data[0].di == undefined);
+        assert.true(table.data[1].di == undefined);
+        assert.true(table.data[2].di == undefined);
+      });
+
+      QUnit.test('should trim objects if configured', function(assert) {
+        
+        let data = [{id: 1, di: 3}, {id: 2, di: 2}, {id: 3, di:1}];
+
+        let tableOptions = {
+            fields: ['id'], 
+            numbers: ['id'], 
+            showByDefault : true
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id");
+        
+        console.table(table.data);
+        assert.true(table.data[0].di == undefined);
+        assert.true(table.data[1].di == undefined);
+        assert.true(table.data[2].di == undefined);
+      });
+
+      
+      QUnit.test('should not trim objects if not configured', function(assert) {
+        
+        let data = [{id: 1, di: 3}, {id: 2, di: 2}, {id: 3, di:1}];
+
+        let tableOptions = {
+            fields: ['id'], 
+            numbers: ['id'], 
+            showByDefault : true,
+            trimObjects : false
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id");
+        
+        console.table(table.data);
+        assert.true(table.data[0].di != undefined);
+        assert.true(table.data[1].di != undefined);
+        assert.true(table.data[2].di != undefined);
+      });
+
+      QUnit.test('should not display props defined but not requested', function(assert) {
+        
+        let data = [{id: 1, di: 3}, {id: 2, di: 2}, {id: 3, di:1}];
+
+        let tableOptions = {
+            fields: ['id'], 
+            numbers: ['id'], 
+            showByDefault : true,
+            trimObjects : false
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id");
+        
+        assert.dom('#tableTest > table > thead > tr > th').includesText("id");
+        assert.dom('#tableTest > table > thead > tr > th').exists({count:1});
+      });
+
+
+      QUnit.test('should not be able to search on 1 character', function(assert) {
+        
+        let data = [{id: 1, di: 3}, {id: 2, di: 2}, {id: 3, di:1}];
+
+        let tableOptions = {
+            fields: ['id'], 
+            numbers: ['id'], 
+            showByDefault : true,
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id");
+
+        table.search("1");
+
+        console.table(table.data);
+        
+        assert.true((table.data.filter(f => f._selected).length === 3), `Expected length 3, actual ${table.data.filter(f => f._selected).length}`);
+        
+      });
+
+      QUnit.test('should amend selected prop on search', function(assert) {
+        
+        let data = [{id: 1, name: "Frank"}, {id: 2, name: "Sue"}, {id: 3, name:"Amelia"}];
+
+        let tableOptions = {
+            fields: ['id', 'name'], 
+            numbers: ['id'], 
+            showByDefault : true,
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id");
+
+        table.search("Amelia");
+
+        console.table(table.data);
+
+        assert.true((table.data.filter(f => f._selected).length === 1), `Expected length 1, actual ${table.data.filter(f => f._selected).length}`);
+        
+      });
+
+      QUnit.test('should ignore case when searching', function(assert) {
+        
+        let data = [{id: 1, name: "Frank"}, {id: 2, name: "Sue"}, {id: 3, name:"Amelia"}];
+
+        let tableOptions = {
+            fields: ['id', 'name'], 
+            numbers: ['id'], 
+            showByDefault : true,
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id");
+
+        table.search("amelia");
+
+        assert.true((table.data.filter(f => f._selected).length === 1), `Expected length 1, actual ${table.data.filter(f => f._selected).length}`);
+        
+      });
+
+      QUnit.test('should draw only matching rows in search', function(assert) {
+        
+        let data = [{id: 1, name: "Frank"}, {id: 2, name: "Sue"}, {id: 3, name:"Amelia"}];
+
+        let tableOptions = {
+            fields: ['id', 'name'], 
+            numbers: ['id'], 
+            showByDefault : true,
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id");
+
+        table.search("amelia");
+
+        
+
+        let elm = document.getElementById("__results");
+
+        //let length = (table.data.filter(f => f._selected)).length;
+        assert.dom('#tableTest > table > tbody > tr > td:nth-child(2)').hasText("Amelia");
+
+        assert.true(document.querySelectorAll('#tableTest > table > tbody > tr').length == 1);
+      });
+
+
+      QUnit.test('should show same number of rows after reorder', function(assert) {
+        
+        let data = [{id: 1, name: "Frank"}, {id: 2, name: "Sue"}, {id: 3, name:"Amelia"}];
+
+        let tableOptions = {
+            fields: ['id', 'name'], 
+            numbers: ['id'], 
+            showByDefault : true,
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id");
+
+        let rows1 =  document.querySelectorAll('#tableTest > table > tbody > tr').length;
+
+        table.order("id", false);
+
+
+        let rows2 =  document.querySelectorAll('#tableTest > table > tbody > tr').length;
+
+        assert.true(rows1 === rows2, `expected to have ${rows1} but found ${rows2} rows`);
+      });
+
+
+
+
+    });
+  </script>
