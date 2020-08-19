@@ -50,11 +50,11 @@ The final step is to apply an ordering to the table:
 The options object that you supply can have the following properties:
 
 1. _**fields**_: An array of fieldnames that you want to use to for the columns in the table. The order of these define the order of the columns displayed in the table (_required_)
-1. _**numbers**_: An array of fieldnames that are to be treated as numbers when the table is ordering data. If a field is not defined in here then it is assumed to be a string (_optional)
-1. _**showByDefault**_: A boolean that denotes if the table should show rows of data as soon as it is created. If you exclude this it defaults to `true` (_optional)
-1. _**trimObjects**_: A boolean that denotes if the objects in the data array have properties that are not defined in the _fields_ property trimmed from the object. Doing so decreases memoy usage and increases search performance. If you exclude this it defaults to `true` (_optional)
-1. _**indicatorAsc**_: A string containing the html to use for the ascending indicator. This can be any valid HTML. If not included a default indicator is used. It must also be used in conjunction with 'indicatorDec' (_optional)
-1. _**indicatorDec**_: A string containing the html to use for the descending indicator. This can be any valid HTML. If not included a default indicator is used. It must also be used in conjunction with 'indicatorAsc' (_optional)
+1. _**numbers**_: An array of fieldnames that are to be treated as numbers when the table is ordering data. If a field is not defined in here then it is assumed to be a string (_optional_)
+1. _**showByDefault**_: A boolean that denotes if the table should show rows of data as soon as it is created. If you exclude this it defaults to `true` (_optional_)
+1. _**trimObjects**_: A boolean that denotes if the objects in the data array have properties that are not defined in the _fields_ property trimmed from the object. Doing so decreases memoy usage and increases search performance. If you exclude this it defaults to `true` (_optional_)
+1. _**indicatorAsc**_: A string containing the html to use for the ascending indicator. This can be any valid HTML. If not included a default indicator is used. It must also be used in conjunction with 'indicatorDec' (_optional_)
+1. _**indicatorDec**_: A string containing the html to use for the descending indicator. This can be any valid HTML. If not included a default indicator is used. It must also be used in conjunction with 'indicatorAsc' (_optional_)
 
 
 ## Ordering
