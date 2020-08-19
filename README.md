@@ -61,7 +61,7 @@ The options object that you supply can have the following properties:
 
 While the ability to click on the table header and sort by that column is included by default you can also invoke column ordering via JavaScript by calling the `order()` function on the table object. This method takes the following parameters:
 
-1. _**fieldName**_: The field name by which to order by (_required)
+1. _**fieldName**_: The field name by which to order by (_required_)
 1. _**isAscending**_: A boolean denoting whether the order is ascending (`true`) or descending (`false`) (_optional_)
 
 If you exclude the ordering and the table is already ordered by the field specified then the order is reversed, while if you exclude the ordering and define a new field to order by then an ascending ordering is assumed
