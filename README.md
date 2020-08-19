@@ -19,7 +19,7 @@ The library is designed for use in a browser, and so you can simply drop in a st
 
 ## Basic Usage
 
-Setting up a naked table is super simple, and requires a just three simple steps. The first step in using the table is to simple define a placeholder Html element on your page with any unique id that you want, e.g:
+Setting up a naked table is super simple, and requires a just three steps. The first step in using the table is to define a placeholder Html element on your page with any unique id that you want, e.g:
 
 `
     <div id="tableTest"></div>
