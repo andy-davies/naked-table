@@ -32,6 +32,12 @@ class NakedTable {
         if('trimObjects' in this.options === false) {
             this.options.trimObjects = true;
         }
+
+        if('showByDefault' in this.options === false) {
+            this.options.showByDefault = true;
+        }
+
+
         
         let trimData = null;
         if(this.options.trimObjects) {

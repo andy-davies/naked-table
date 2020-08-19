@@ -4,7 +4,6 @@
         <title>Naked Table Example</title>
         <link rel="stylesheet" type="text/css" href="example.css">
         <script src="naked-table.js"></script> 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     </head>
 
     <body>
@@ -71,22 +70,19 @@
                         id: i,
                         firstName: names[this.rand(0, names.length)].first,
                         lastName: names[this.rand(0, names.length)].last,
-                        dob: moment((this.randDate())).format("Do MMM YYYY"),
+                        dob: this.randDate(),
                     };
                     idata.push(obj);
         }
 
         let tableOptions = {
             fields: ['id', 'firstName', 'lastName', 'dob'], 
-            numbers: ['id', 'dob'], 
-            showByDefault : true,
-            indicatorAsc : '<img src="img/arrow_up.png"/>',
-            indicatorDesc : '<img src="img/arrow_down.png"/>'
+            numbers: ['id', 'dob']
         }
 
         window.addEventListener("load", function() {
             nTable = new NakedTable(idata, "tableTest", tableOptions);
-            nTable.order("id", true);
+            nTable.order("id");
         });
 
         function performSearch() {

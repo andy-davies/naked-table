@@ -18,21 +18,16 @@ Setting up a naked table is super simple, and requires a just three simple steps
     <div id="tableTest"></div>
 `
 
-The next step is simply create a new naked-table object. the constructor takes in three arguments:
+The next step is simply create a new naked-table object. The constructor takes in three arguments:
 
-1. _data_: An array of JavasSript objects that you want to display
-2. _element id_: The Id of the html element you want the table to render into
-3. _options_: A JavaScript object that contains options that affect how the table operates
-
+1. _*data*_: An array of JavasSript objects that you want to display
+2. _*element id*_: The Id of the html element you want the table to render into
+3. _*options*_: A JavaScript object that contains options that affect how the table operates
 
 `
     let data = [{id: 1}, {id: 2}, {id: 3}];
 
-    let options = {
-            fields: ['id'], 
-            numbers: ['id'], 
-            showByDefault : true
-        }
+    let options = { fields: ['id'], numbers: ['id'] }
 
     let nTable = new NakedTable(data, 'tableTest', options);
 `

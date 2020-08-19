@@ -46,6 +46,21 @@
         assert.dom('#tableTest > table > tbody > tr').exists({count:3});
       });
 
+      QUnit.test('should show by default', function(assert) {
+        
+        let data = [{id: 1}, {id: 2}, {id: 3}];
+
+        let tableOptions = {
+            fields: ['id'], 
+            numbers: ['id']
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id", true);
+        assert.dom('#tableTest table').exists();
+        assert.dom('#tableTest > table > tbody > tr').exists({count:3});
+      });
+
 
       QUnit.test('should be able to create table and order', function(assert) {
         
