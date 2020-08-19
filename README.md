@@ -1,6 +1,5 @@
-# naked-table
-An implementation of a data driven HTML table that focuses on raw functionality and lets you decided on things like styling
-git pull
+# Naked-Table
+Naked-Table is a JavaScript library that provides the basic functionality for dynamically creating tables on a web if you supply it with an array of data. It's called Naked-Table because it is not concerned with any styling and or page interaction other than what it provides. All of this is left to be added by you so that it fits into your page and how you want it to work. 
 
 ## Installation
 
