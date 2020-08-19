@@ -65,3 +65,11 @@ While the ability to click on the table header and sort by that column is includ
 1. _**isAscending**_: A boolean denoting whether the order is ascending (`true`) or descending (`false`) (_optional_)
 
 If you exclude the ordering and the table is already ordered by the field specified then the order is reversed, while if you exclude the ordering and define a new field to order by then an ascending ordering is assumed
+
+## Searching 
+
+_to be completed_
+
+## Applying Styles
+
+_to be completed_
