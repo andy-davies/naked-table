@@ -12,7 +12,7 @@ The library is designed for use in a browser, and so you can simply drop in a st
 
 ## Basic Usage
 
-the first step in using the table is to simple define a placeholder Html element on your page with any unique id that you want, e.g:
+Setting up a naked table is super simple, and requires a just three simple steps. The first step in using the table is to simple define a placeholder Html element on your page with any unique id that you want, e.g:
 
 `
     <div id="tableTest"></div>
@@ -35,7 +35,7 @@ The next step is simply create a new naked-table object. the constructor takes i
         }
 
     let nTable = new NakedTable(data, 'tableTest', options);
-'
+`
 
 The final step is to apply an ordering to the table:
 
