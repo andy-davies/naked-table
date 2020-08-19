@@ -54,4 +54,14 @@ The options object that you supply can have the following properties:
 1. _**showByDefault**_: A boolean that denotes if the table should show rows of data as soon as it is created. If you exclude this it defaults to `true` (_optional)
 1. _**trimObjects**_: A boolean that denotes if the objects in the data array have properties that are not defined in the _fields_ property trimmed from the object. Doing so decreases memoy usage and increases search performance. If you exclude this it defaults to `true` (_optional)
 1. _**indicatorAsc**_: A string containing the html to use for the ascending indicator. This can be any valid HTML. If not included a default indicator is used. It must also be used in conjunction with 'indicatorDec' (_optional)
-1. _**indicatorDec**_: A string containing the html to use for the descending indicator. This can be any valid HTML. If not included a default indicator is used. It must also be used in conjunction with 'indicatorDec' (_optional)
+1. _**indicatorDec**_: A string containing the html to use for the descending indicator. This can be any valid HTML. If not included a default indicator is used. It must also be used in conjunction with 'indicatorAsc' (_optional)
+
+
+## Ordering
+
+While the ability to click on the table header and sort by that column is included by default you can also invoke column ordering via JavaScript by calling the `order()` function on the table object. This method takes the following parameters:
+
+1. _**fieldName**_: The field name by which to order by (_required)
+1. _**isAscending**_: A boolean denoting whether the order is ascending (`true`) or descending (`false`) (_optional_)
+
+If you exclude the ordering and the table is already ordered by the field specified then the order is reversed, while if you exclude the ordering and define a new field to order by then an ascending ordering is assumed
