@@ -13,9 +13,9 @@ Naked-Table is a JavaScript library that provides the basic functionality for dy
 
 The library is designed for use in a browser, and so you can simply drop in a standard script tag:
 
-`
+```html
     <script src="naked-table.js"></script>
-`
+````
 
 ## Basic Usage
 
@@ -74,9 +74,12 @@ Table data can be easily searched with only matching rows displayed. This is don
 
 There are no assumptions made about how the search should be presented to the user on the screen or how the user should interact with the search, therefore no UI elements are provided for searching and these must be provided by the page itself, for example:
 
-```
+```html
     <input type="text" id="searchinput"><button onclick="performSearch()">Search</button>
 
+```
+
+```javasscript
     function performSearch() {
         nTable.search(document.getElementById('searchinput').value);
     }
@@ -89,7 +92,7 @@ This means that the page and not the table is in control of all of the styling a
 
 As with the search there are no assumptions made about styling of the table, no inline styles are added to the table and no CSS classes are added either. However this does not mean that the table cannot be styled, you simply need to hang the styles off the 'id' that you used to define the table with. For example to make the table full width you can use:
 
-```
+```css
     #tableTest {
         width: 100%;
     }
@@ -101,7 +104,7 @@ As with the search there are no assumptions made about styling of the table, no 
 
 Or to add striped rows you can use:
 
-```
+```css
     #tableTest > table > tbody tr:nth-child(odd) {
         background: #ffffff;
     }
