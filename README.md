@@ -4,8 +4,8 @@ Naked-Table is a JavaScript library that provides the basic functionality for dy
 ## Features
 
 1. Automatic creation of HTML table from data
-1. Suitable for large amounts of data as it only rendered data that is visible to the user
-1. Automatic ability to order columns
+1. Lazy loading makes it suitable for large amounts of data as it only rendered data that is visible to the user
+1. Column ordering is automatically added
 1. Allows searching of data
 1. Custom column ordering icons to fit your site style
 
@@ -68,8 +68,48 @@ If you exclude the ordering and the table is already ordered by the field specif
 
 ## Searching 
 
-_to be completed_
+Table data can be easily searched with only matching rows displayed. This is done by calling the _search()_ method, which takes a single parameter:
+
+1. _**searchTerm**_: A string containing the search term to look for. If the string is empty then the serch is reset and all the rows are displayed (_required_)
+
+There are no assumptions made about how the search should be presented to the user on the screen or how the user should interact with the search, therefore no UI elements are provided for searching and these must be provided by the page itself, for example:
+
+```
+    <input type="text" id="searchinput"><button onclick="performSearch()">Search</button>
+
+    function performSearch() {
+        nTable.search(document.getElementById('searchinput').value);
+    }
+
+```
+
+This means that the page and not the table is in control of all of the styling and interaction with the search. 
 
 ## Applying Styles
 
-_to be completed_
+As with the search there are no assumptions made about styling of the table, no inline styles are added to the table and no CSS classes are added either. However this does not mean that the table cannot be styled, you simply need to hang the styles off the 'id' that you used to define the table with. For example to make the table full width you can use:
+
+```
+    #tableTest {
+        width: 100%;
+    }
+
+    #tableTest > table {
+        width: 100%;
+    }
+```
+
+Or to add striped rows you can use:
+
+```
+    #tableTest > table > tbody tr:nth-child(odd) {
+        background: #ffffff;
+    }
+
+    #tableTest > table > tbody tr:nth-child(even) {
+        background: #f4f4f4;
+    }
+```
+
+
+
