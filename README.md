@@ -79,7 +79,7 @@ There are no assumptions made about how the search should be presented to the us
 
 ```
 
-```javasscript
+```javascript
     function performSearch() {
         nTable.search(document.getElementById('searchinput').value);
     }
