@@ -21,9 +21,9 @@ The library is designed for use in a browser, and so you can simply drop in a st
 
 Setting up a naked table is super simple, and requires a just three steps. The first step in using the table is to define a placeholder Html element on your page with any unique id that you want, e.g:
 
-`
+```html
     <div id="tableTest"></div>
-`
+````
 
 The next step is simply create a new naked-table object. The constructor takes in three arguments:
 
