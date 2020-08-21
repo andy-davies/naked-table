@@ -2,8 +2,8 @@
 
 class NakedTable {
 
-    #numItems = 0;  
-    #pageSize = 20;
+    numItems = 0;  
+    pageSize = 20;
     currentPage = 1;
     isAsc = null;
     currentOrderedColumn = "";  
@@ -18,15 +18,15 @@ class NakedTable {
     }
 
     get numberofItems() {
-        return this.#numItems;
+        return this.numItems;
     }
 
     init() {
 
         // if no asc / desc indicators have been specified then add in default ones
         if(this.options.indicatorAsc == undefined || this.options.indicatorDesc == undefined) {
-            this.options.indicatorAsc = '&#8679;';
-            this.options.indicatorDesc = '&#8681;';
+            this.options.indicatorAsc = '&8679;';
+            this.options.indicatorDesc = '&8681;';
         }
 
         if('trimObjects' in this.options === false) {
@@ -94,7 +94,7 @@ class NakedTable {
             return;
 
         this.currentPage = 0;
-        this.#numItems = 0;
+        this.numItems = 0;
         this.currentSearch = searchTerm.toLowerCase();
 
         if(this.currentSearch != "")
@@ -122,7 +122,7 @@ class NakedTable {
 
         document.getElementById("__results").innerHTML = "";
         this.currentPage = 1;
-        this.#numItems = 0;
+        this.numItems = 0;
 
         this.data.forEach(i => i._displayed = false);
 
@@ -191,7 +191,7 @@ class NakedTable {
         let result = "";
         let c = 0; // controls how many items to add
 
-        let startItem = (this.currentPage * this.#pageSize) - this.#pageSize;
+        let startItem = (this.currentPage * this.pageSize) - this.pageSize;
 
         for (let itemIdx in this.data) {
 
@@ -209,18 +209,18 @@ class NakedTable {
 
                 this.data[itemIdx]._displayed = true;
 
-                this.#numItems++;
+                this.numItems++;
 
                 //console.log("drawing record: " + this.data[itemIdx].id);
 
                 c++;
             }
 
-            if(c == this.#pageSize)
+            if(c == this.pageSize)
                 break;
         }
 
-        if(this.#numItems === 0 && this.currentSearch.length > 0){
+        if(this.numItems === 0 && this.currentSearch.length > 0){
             result += `<tr><td colspan=${this.options.fields.length}>No records found</td></tr>`;
         }
         document.getElementById("__results").insertAdjacentHTML('beforeend', result);
