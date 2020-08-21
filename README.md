@@ -64,7 +64,7 @@ While the ability to click on the table header and sort by that column is includ
 1. _**fieldName**_: The field name by which to order by (_required_)
 1. _**isAscending**_: A boolean denoting whether the order is ascending (`true`) or descending (`false`) (_optional_)
 
-If you exclude the ordering and the table is already ordered by the field specified then the order is reversed, while if you exclude the ordering and define a new field to order by then an ascending ordering is assumed
+If you exclude '_isAscending_'  and the table is already ordered by the field specified then the order is reversed, while if you exclude the ordering and define a new field to order by then an ascending ordering is assumed
 
 ## Searching 
 
@@ -76,21 +76,19 @@ There are no assumptions made about how the search should be presented to the us
 
 ```html
     <input type="text" id="searchinput"><button onclick="performSearch()">Search</button>
-
 ```
 
 ```javascript
     function performSearch() {
         nTable.search(document.getElementById('searchinput').value);
     }
-
 ```
 
 This means that the page and not the table is in control of all of the styling and interaction with the search. 
 
 ## Applying Styles
 
-As with the search there are no assumptions made about styling of the table, no inline styles are added to the table and no CSS classes are added either. However this does not mean that the table cannot be styled, you simply need to hang the styles off the 'id' that you used to define the table with. For example to make the table full width you can use:
+As with the search there are no assumptions made about the styling of the table, no inline styles are added to the table and no CSS classes are added either. However this does not mean that the table cannot be styled, you simply need to hang the styles off the 'id' that you used to define the table with. For example to make the table full width you can use:
 
 ```css
     #tableTest {
