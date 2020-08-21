@@ -90,7 +90,7 @@ class NakedTable {
     search(searchTerm) {
 
         // we don't allow searches of < 2 chars
-        if(searchTerm.length < 2)
+        if(searchTerm.length > 0 && searchTerm.length < 2)
             return;
 
         this.currentPage = 0;

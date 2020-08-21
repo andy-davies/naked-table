@@ -345,6 +345,30 @@
         assert.true(rows1 === rows2, `expected to have ${rows1} but found ${rows2} rows`);
       });
 
+      QUnit.test('should show full list if empty search is used', function(assert) {
+        
+        let data = [{id: 1, name: "Frank"}, {id: 2, name: "Sue"}, {id: 3, name:"Amelia"}];
+
+        let tableOptions = {
+            fields: ['id', 'name'], 
+            numbers: ['id'], 
+            showByDefault : true,
+        }
+
+        let table = new NakedTable(data, "tableTest", tableOptions);
+        table.order("id");
+
+        table.search("amelia");
+
+        let rows1 =  document.querySelectorAll('#tableTest > table > tbody > tr').length;
+
+        table.search("");
+
+        let rows2 =  document.querySelectorAll('#tableTest > table > tbody > tr').length;
+
+        assert.true(rows1 === 1, `initial search expected to have 1 row but found ${rows1} rows`);
+        assert.true(rows2 === 3, `reset search expected to have 3 row but found ${rows2} rows`);
+      });
 
 
 
