@@ -4,18 +4,23 @@ Naked-Table is a JavaScript library that provides the basic functionality for dy
 ## Features
 
 1. Automatic creation of HTML table from data
-1. Zero dependency. This is vanilla JavaScript, no other library is needed
+1. Zero dependency. This is vanilla JavaScript, no other library is needed to make this work
+1. Really small. Minified version is 5Kb, GZip'd this comes down to only 1.5Kb
 1. Lazy loading makes it suitable for large amounts of data as it only rendered data that is visible to the user
 1. Column ordering is automatically added
 1. Allows searching of data
 1. Custom column ordering icons to fit your site style
+
+## Browser comaptibility
+
+Naked-table is compatible with modern web browsers and should work in Chrome, Edge, FireFox and Safari. Sorry, but it won't work in any version of IE.
 
 ## Installation
 
 The library is designed for use in a browser, and so you can simply drop in a standard script tag:
 
 ```html
-    <script src="naked-table.js"></script>
+    <script src="naked-table.min.js"></script>
 ````
 
 ## Basic Usage

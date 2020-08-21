@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Andy Davies
+/** @license Copyright (c) 2020 Andy Davies */
 
 class NakedTable {
 
@@ -25,8 +25,8 @@ class NakedTable {
 
         // if no asc / desc indicators have been specified then add in default ones
         if(this.options.indicatorAsc == undefined || this.options.indicatorDesc == undefined) {
-            this.options.indicatorAsc = '&8679;';
-            this.options.indicatorDesc = '&8681;';
+            this.options.indicatorAsc = '&#8679;';
+            this.options.indicatorDesc = '&#8681;';
         }
 
         if('trimObjects' in this.options === false) {
