@@ -115,11 +115,6 @@ class NakedTable {
 
     order(fieldName, bisAsc) {
 
-        console.clear();
-
-        // TODO: investigate TimSort for chromium based broswers
-        // TODO: investigate whether array reverse is better when not changing sort column (or have logic to simply read array backwards, probably better)
-
         document.getElementById("__results").innerHTML = "";
         this.currentPage = 1;
         this.numItems = 0;
@@ -128,43 +123,47 @@ class NakedTable {
 
         this.clearHeaderIcons();
 
-        if(this.currentOrderedColumn === "")
-            this.currentOrderedColumn = fieldName;
-
-        if(bisAsc != undefined) {
-            // use what was explicitly passed in for the directions 
-            this.isAsc = bisAsc;
+        if(this.currentOrderedColumn == fieldName) {
+            this.isAsc = this.isAsc ? false : true;
+            this.data.reverse();
         }
         else {
-            // work our the direction
-            if(this.isAsc == null) {
-                this.isAsc = true;
-            }
-            else if(this.currentOrderedColumn == fieldName) {
-                this.isAsc = this.isAsc ? false : true;
+            if(this.currentOrderedColumn === "")
+                this.currentOrderedColumn = fieldName;
+
+            if(bisAsc != undefined) {
+                // use what was explicitly passed in for the directions 
+                this.isAsc = bisAsc;
             }
             else {
-                this.isAsc = true;
-                this.currentOrderedColumn = fieldName;
+                // work our the direction
+                if(this.isAsc == null) {
+                    this.isAsc = true;
+                }
+                else if(this.currentOrderedColumn == fieldName) {
+                    this.isAsc = this.isAsc ? false : true;
+                }
+                else {
+                    this.isAsc = true;
+                    this.currentOrderedColumn = fieldName;
+                }
+            }
+            
+            if(this.isAsc)
+            {
+                if(this.options.numbers.some(e => e == fieldName)) 
+                    this.data.sort(this.getNumberSort(fieldName));
+                else
+                    this.data.sort(this.getStringSort(fieldName));
+            }
+            else
+            {
+                if(this.options.numbers.some(e => e == fieldName)) 
+                    this.data.sort(this.getNumberSortDesc(fieldName));
+                else
+                    this.data.sort(this.getStringSortDesc(fieldName));
             }
         }
-        
-        if(this.isAsc)
-        {
-            if(this.options.numbers.some(e => e == fieldName)) 
-                this.data.sort(this.getNumberSort(fieldName));
-            else
-                this.data.sort(this.getStringSort(fieldName));
-        }
-        else
-        {
-            if(this.options.numbers.some(e => e == fieldName)) 
-                this.data.sort(this.getNumberSortDesc(fieldName));
-            else
-                this.data.sort(this.getStringSortDesc(fieldName));
-        }
-
-        console.table(this.data);
 
         this.drawTable(); 
         this.setHeaderIcons();
@@ -186,8 +185,6 @@ class NakedTable {
 
     drawTable () {
 
-
-        console.trace("draw");
         let result = "";
         let c = 0; // controls how many items to add
 
@@ -210,8 +207,6 @@ class NakedTable {
                 this.data[itemIdx]._displayed = true;
 
                 this.numItems++;
-
-                //console.log("drawing record: " + this.data[itemIdx].id);
 
                 c++;
             }
